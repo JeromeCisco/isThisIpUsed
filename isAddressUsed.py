@@ -94,4 +94,25 @@ def gethostinventory():
 
 ip = raw_input(" [>] Enter IP to check:  ")
 
-print gethostinventory()
+if re.match(r'^((\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])$', ip):  
+  print "\nValid IP\n"  
+else:
+  print "\nInvalid IP... start again and please don't screw up next time...\n"
+  quit()
+
+##############################################################################
+# Checking if this IP is used by a host...
+##############################################################################
+
+print "Checking if this IP is used by a host...\n"
+isUsed = 0
+for line in gethostinventory():
+  if line[2] == ip:
+    isUsed = 1
+    break
+
+if isUsed == 1:
+  print ("IP address %s is currently used by host with MAC address %s\n" % (ip,line[1]))
+else:
+  print ("IP address %s is currently not used by a host\n" % ip)
+
