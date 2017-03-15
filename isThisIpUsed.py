@@ -27,7 +27,7 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 if len(sys.argv) < 2:
-  print "Usage: isAddressUsed.py -c file.conf"
+  print "Usage: isThisIpUsed.py -c file.conf"
   exit()
 
 
