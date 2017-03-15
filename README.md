@@ -12,7 +12,7 @@ in your network
 This app relies on the great and only APIC-EM controller which
 abstract the network.
 You will need to provide all APIC-EM details (IP and credentials)
-in a configuration file. "isAddressUsed.conf" file is
+in a configuration file. "isThisIpUsed.conf" file is
 provided as an example.
 
 All rights reserved - copyright Jerome Durand
