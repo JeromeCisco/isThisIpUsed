@@ -26,6 +26,11 @@ except:
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
+if len(sys.argv) < 2:
+  print "Usage: isAddressUsed.py -c file.conf"
+  exit()
+
+
 ##############################################################################
 # READ PARAMETERS
 ##############################################################################
@@ -87,6 +92,23 @@ def gethostinventory():
     host_list.append([i,str(item["hostMac"]),str(item["hostIp"])])
   return host_list;
 
+##############################################################################
+# Get IPs on network devices
+##############################################################################
+
+def getinterfaceinventory():
+  #global host_list
+  url = '%s/interface' % APIC_BASE
+  req_inv = requests.get(url,verify=False, headers=apic_headers)
+  parsed_result= req_inv.json()
+  req_list=parsed_result['response']
+  interface_list = []
+  i = 0
+  for item in req_list:
+    i = i + 1
+    interface_list.append([i,str(item["ipv4Address"]),str(item["ipv4Mask"]),str(item["portName"]),str(item["serialNo"])])
+  return interface_list;
+
 
 ##############################################################################
 # Core Program
@@ -115,4 +137,20 @@ if isUsed == 1:
   print ("IP address %s is currently used by host with MAC address %s\n" % (ip,line[1]))
 else:
   print ("IP address %s is currently not used by a host\n" % ip)
+
+##############################################################################
+# Checking if this IP is used on a network device...
+##############################################################################
+
+print "Checking if this IP is used on a network device...\n"
+isUsed = 0
+for line in getinterfaceinventory():
+  if line[1] == ip:
+    isUsed = 1
+    break
+
+if isUsed == 1:
+  print ("IP address %s is currently used by network device with Serial number %s on interface %s\n" % (ip,line[4],line[3]))
+else:
+  print ("IP address %s is currently not used by a network device\n" % ip)
 
