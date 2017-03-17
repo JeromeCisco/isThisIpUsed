@@ -18,7 +18,7 @@ import argparse
 import re
 
 # Check Python version
-if sys.version_info >= (3, 0):
+if sys.version_info.major == 3:
   raise "Works only with Python 2 at the time being... Sorry... but please feel free to contribute!"
   exit()
 
