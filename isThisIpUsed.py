@@ -114,12 +114,12 @@ def getinterfaceinventory():
 # Core Program
 ##############################################################################
 
-ip = raw_input(" [>] Enter IP to check:  ")
+ip = raw_input(" [>] Enter IPv4 address to check:  ")
 
 if re.match(r'^((\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])$', ip):  
-  print "\nValid IP\n"  
+  print "\nValid IPv4\n"  
 else:
-  print "\nInvalid IP... start again and please don't screw up next time...\n"
+  print "\nInvalid IPv4... start again and please don't screw up next time...\n"
   quit()
 
 ##############################################################################
