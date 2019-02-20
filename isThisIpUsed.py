@@ -94,7 +94,7 @@ def gethostinventory():
   i = 0
   for item in req_list:
     i = i + 1
-    host_list.append([i,str(item["hostMac"]),str(item["hostIp"])])
+    host_list.append([i,str(item["hostMac"]),str(item["hostIp"]),str(item["connectedInterfaceName"]),str(item["connectedNetworkDeviceIpAddress"])])
   return host_list;
 
 ##############################################################################
@@ -139,7 +139,7 @@ for line in gethostinventory():
     break
 
 if isUsed == 1:
-  print ("IP address %s is currently used by host with MAC address %s\n" % (ip,line[1]))
+  print ("IP address %s is currently used by host with MAC address %s on interface %s of switch with IP address %s\n" % (ip,line[1],line[3],line[4]))
 else:
   print ("IP address %s is currently not used by a host\n" % ip)
 
